@@ -29,6 +29,8 @@ KEYWORDS = [
     ('DEFINEAS',     r'\bdefineas\b'),
 
     ('IF',           r'\bif\b'),
+    ('ELSEIF',       r'\belseif\b'),
+    ('ELSE',         r'\belse\b'),
 
     ('WHILE',        r'\bwhile\b'),
     ('FOR',          r'\bfor\b'),

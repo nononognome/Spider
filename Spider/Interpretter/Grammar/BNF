@@ -1,0 +1,50 @@
+<program> ::= <statement_list>
+
+<statement_list> ::= <statement>
+                   | <statement> <statement_list>
+
+<statement> ::= <assignment>
+                | <declaration>
+                | <if_statement>
+                | <while_statement>
+                | <for_statement>
+                | <return_statement>
+                | <expression_statement>
+
+<assignment> ::= IDENTIFIER <assigner> <expression>
+
+% EXPRESSIONS
+<expression> ::= <literal>
+               | IDENTIFIER
+               | <unary_op> <expression>
+               | <expression> <unary_op>
+               | <expression> <binary_op> <expression>
+               | <cast>
+               | IDENTIFIER LPAREN <expression_list>? RPAREN
+
+<expression_list> ::= <expression>
+               | <expression> COMMA <expression_list>
+
+<cast> ::= LPAREN <type> RPAREN <expression>
+
+
+% IF STATEMENTS
+
+<if_statement> ::= IF <expression> LBRACE <statement_list> RBRACE <elseif_clauses> <else_clause>
+
+% RECURSIVE ELSEIF
+
+<elseif_clauses> ::= <empty>
+                   | <elseif_clause> <elseif_clauses>
+
+<elseif_clause> ::= ELSEIF <expression> LBRACE <statement_list> RBRACE
+
+% OPTIONAL ELSE
+
+<else_clause> ::= <empty>
+                | ELSE LBRACE <statement_list> RBRACE
+
+
+
+<empty> ::= 
+
