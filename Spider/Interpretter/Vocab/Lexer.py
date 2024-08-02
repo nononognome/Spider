@@ -1,18 +1,20 @@
 import re
-from Token import *
+from Token import Token, token_regex
 
 class Lexer:
-    def __init__(self, input_text):
+    def __init__(self, input_text, token_specification):
         self.input_text = input_text
         self.tokens = []
         self.current_pos = 0
         self.line = 1
         self.column = 1
+        self.spec = token_specification
 
     def tokenize(self):
-        for mo in re.finditer(token_regex, self.input_text):
+        for mo in re.finditer(self.spec, self.input_text):
             kind = mo.lastgroup
-            value = mo.group(kind)
+            if kind != None: value = mo.group(kind)
+
             column_start = mo.start() - self.input_text.rfind('\n', 0, mo.start())
             if kind == 'EOL':
                 self.line += 1
@@ -24,6 +26,7 @@ class Lexer:
                 token = Token(kind, value, self.line, column_start)
                 self.tokens.append(token)
             self.column += len(value)
+            
         return self.tokens
 
 # Example usage
@@ -33,7 +36,7 @@ if "hello" in "hello world"{
     print("I dont need ;")
 }
 """
-lexer = Lexer(input_code)
+lexer = Lexer(input_code, token_regex)
 tokens = lexer.tokenize()
 line = 0
 for token in tokens:

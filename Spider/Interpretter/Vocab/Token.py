@@ -24,6 +24,8 @@ LITERALS = [
 
 
 KEYWORDS = [
+    ('RETURN',       r'\breturn\b'),
+
     ('DEFINEAS',     r'\bdefineas\b'),
 
     ('IF',           r'\bif\b'),
